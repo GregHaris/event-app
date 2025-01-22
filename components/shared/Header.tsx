@@ -3,6 +3,7 @@ import { Button } from '@ui/button';
 import Image from 'next/image';
 import Link from 'next/link';
 
+import MobileNav from './MobileNav';
 import NavItems from './NavItems';
 
 export const Header = () => {
@@ -28,7 +29,7 @@ export const Header = () => {
         <div className="flex w-32 justify-end gap-3 mr-4">
           <SignedIn>
             <UserButton />
-            <NavItems/>
+            <MobileNav/>
           </SignedIn>
           <SignedOut>
             <Button asChild className="rounded-full" size={'lg'}>
