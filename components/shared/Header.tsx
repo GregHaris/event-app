@@ -19,6 +19,12 @@ export const Header = () => {
           />
         </Link>
 
+        <SignedIn>
+          <div className="hidden md:flex-between w-full max-w-xs">
+            <NavItems />
+          </div>
+        </SignedIn>
+
         <div className="flex w-32 justify-end gap-3 mr-4">
           <SignedIn>
             <UserButton />
