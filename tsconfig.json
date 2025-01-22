@@ -31,6 +31,8 @@
       ],
       "@ui/*": [
         "./components/ui/*"
+      ], "@shared/*": [
+        "./components/shared/*"
       ],
       "@lib/*": [
         "./lib/*"
