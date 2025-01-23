@@ -9,7 +9,7 @@ export default function Home() {
           <h1 className="h1-bold">Host, Connect, Celebrate: Your Event, Our Platform!</h1>
           <p className="p-regular-20 md:p-regular-24">Book and learn helpful tips from 3,168+ mentors in world-class companies with our global community.</p>
           <Button asChild size={'lg'} className="button w-full sm:w-fit"> 
-            <Link href="#events">Explore Events</Link>
+            <Link href="#events">Explore Now</Link>
           </Button>
         </div>
       </div>
