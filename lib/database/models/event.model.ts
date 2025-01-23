@@ -1,5 +1,21 @@
 
-import { Schema, model, models } from 'mongoose';
+import { Document, Schema, model, models } from 'mongoose';
+
+export interface IEvent extends Document {
+  title: string;
+  description?: string;
+  location?: string;
+  imageUrl: string;
+  startDate: Date;
+  endDate: Date;
+  createdAt: Date;
+  updatedAt: Date;
+  price?: number;
+  isFree: boolean;
+  url?: string;
+  category: Schema.Types.ObjectId | string;
+  organizer: Schema.Types.ObjectId | string;
+}
 
 const EventSchema = new Schema({
   title: { type: String, required: true },
