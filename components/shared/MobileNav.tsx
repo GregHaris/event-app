@@ -5,6 +5,7 @@ import {
   SheetContent,
   SheetHeader,
   SheetTitle,
+  SheetDescription,
   SheetTrigger,
 } from '@ui/sheet';
 
@@ -26,6 +27,9 @@ const MobileNav = () => {
         <SheetContent className="flex flex-col gap-6 bg-white md:hidden">
           <SheetHeader>
             <SheetTitle className="sr-only">Mobile Navigation</SheetTitle>{' '}
+            <SheetDescription className="sr-only">
+              Navigation menu for mobile devices.
+            </SheetDescription>{' '}
           </SheetHeader>
           <Image
             src={'/assets/images/logo.svg'}
