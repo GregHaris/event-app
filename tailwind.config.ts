@@ -1,10 +1,10 @@
 /** @type {import('tailwindcss').Config} */
-import animatePlugin from 'tailwindcss-animate';
+import animate from 'tailwindcss-animate';
 import { withUt } from 'uploadthing/tw';
-import type { Config } from 'tailwindcss';
 
-module.exports = withUt({
-  darkMode: ['class'],
+export default withUt({
+  important: true,
+  darkMode: 'class',
   content: [
     './pages/**/*.{ts,tsx}',
     './components/**/*.{ts,tsx}',
@@ -96,5 +96,5 @@ module.exports = withUt({
       },
     },
   },
-  plugins: [animatePlugin],
-} satisfies Config) ;
+  plugins: [animate],
+});
