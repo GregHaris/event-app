@@ -10,9 +10,8 @@ export default withUt({
     './components/**/*.{ts,tsx}',
     './app/**/*.{ts,tsx}',
     './src/**/*.{ts,tsx}',
-
-    // Path to @uploadthing/react
-    './node_modules/@uploadthing/react/dist**',
+    // Add UploadThing UI paths
+    './node_modules/@uploadthing/react/dist/**.{cjs, cts, js,ts,jsx,tsx}',
   ],
   theme: {
     container: {
