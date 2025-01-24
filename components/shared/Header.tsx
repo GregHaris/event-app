@@ -32,7 +32,7 @@ export const Header = () => {
             <MobileNav/>
           </SignedIn>
           <SignedOut>
-            <Button asChild className="rounded-full" size={'lg'}>
+            <Button asChild className=" cursor-pointer rounded-full" size={'lg'}>
               <SignInButton />
             </Button>
           </SignedOut>
