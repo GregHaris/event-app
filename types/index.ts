@@ -5,14 +5,14 @@ export type CreateUserParams = {
   lastName: string;
   username: string;
   email: string;
-  photo: string;
+  image: string;
 };
 
 export type UpdateUserParams = {
   firstName: string;
   lastName: string;
   username: string;
-  photo: string;
+  image: string;
 };
 
 // ====== EVENT PARAMS
