@@ -6,7 +6,7 @@ export const Footer = () => {
 
   return (
     <footer className="border-t">
-      <div className="flex flex-col wrapper flex-between flex-center gap-4 p-5 text-center sm:flex-row">
+      <div className="flex flex-col wrapper gap-4 p-5 text-center sm:flex-row sm:justify-between sm:items-center">
         <Link href={'/'}>
           <Image
             src={'/assets/images/logo.svg'}
@@ -15,7 +15,7 @@ export const Footer = () => {
             height={38}
           />
         </Link>
-        <p className="text-sm"> {currentYear} Evently. All Right Reserved</p>
+        <p className="text-sm">{currentYear} Evently. All Right Reserved</p>
       </div>
     </footer>
   );
