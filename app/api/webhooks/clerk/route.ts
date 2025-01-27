@@ -55,7 +55,7 @@ export async function POST(req: Request) {
 
   if (eventType === 'user.created') {
     const { id, email_addresses, image_url, first_name, last_name, username } =
-      evt.data;
+       evt.data;
 
     const user = {
       clerkId: id,
@@ -81,7 +81,8 @@ export async function POST(req: Request) {
   }
 
   if (eventType === 'user.updated') {
-    const { id, image_url, email_addresses, first_name, last_name, username } = evt.data;
+    const { id, image_url, email_addresses, first_name, last_name, username } =
+      evt.data;
 
     const user = {
       username: username || email_addresses[0].email_address.split('@')[0],
