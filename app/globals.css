@@ -1,6 +1,9 @@
-@import 'tailwindcss';
+@import "tailwindcss";
+
+@import "uploadthing/tw/v4";
 
 @config '../tailwind.config.ts';
+@source "../node_modules/@uploadthing/react/dist";
 
 /*
   The default border color has changed to `currentColor` in Tailwind CSS v4,
