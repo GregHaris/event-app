@@ -1,8 +1,7 @@
 /** @type {import('tailwindcss').Config} */
 import animate from 'tailwindcss-animate';
-import { withUt } from 'uploadthing/tw';
 
-export default withUt({
+const config = {
   important: true,
   darkMode: 'class',
   content: [
@@ -25,7 +24,7 @@ export default withUt({
       colors: {
         primary: {
           500: '#624CF5',
-          50: ' #F6F8FD',
+          50: '#F6F8FD',
           DEFAULT: '#624CF5',
           foreground: 'hsl(var(--primary-foreground))',
         },
@@ -99,4 +98,6 @@ export default withUt({
     },
   },
   plugins: [animate],
-});
+};
+
+export default config;
