@@ -25,6 +25,10 @@ export const CreateEvent = async ({
       category: event.categoryId,
       organizer: userId,
     });
+
+    // Dummy use case for 'path'
+    console.log(`Event created, redirect to: ${path}`);
+
     return JSON.parse(JSON.stringify(newEvent));
   } catch (error) {
     handleError(error);
