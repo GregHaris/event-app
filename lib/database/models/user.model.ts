@@ -1,6 +1,6 @@
 import { Schema, model, models } from 'mongoose';
 
-const userSchema = new Schema({
+const UserSchema = new Schema({
   clerkId: { type: String, required: true, unique: true },
   email: { type: String, required: true, unique: true },
   username: { type: String, required: true, unique: true },
@@ -11,6 +11,6 @@ const userSchema = new Schema({
   updatedAt: { type: Date, default: Date.now },
 });
 
-const User = models.User || model('User', userSchema);
+const User = models.User || model('User', UserSchema);
 
 export default User;
