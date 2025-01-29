@@ -1,12 +1,23 @@
 'use server';
 
-import { connectToDatabase } from '../database';
+import { Query } from 'mongoose';
+
 import { CreateEventParams } from '@/types';
+import { connectToDatabase } from '../database';
 import { handleError } from '../utils';
-import Event from '../database/models/event.model';
+import Category from '../database/models/category.model';
+import Event, { IEvent } from '../database/models/event.model';
 import User from '../database/models/user.model';
 
-
+const populateEvent = async (query: Query<IEvent | null, IEvent>) => {
+  return query
+    .populate({
+      path: 'organizer',
+      model: User,
+      select: '_id firstName lastName',
+    })
+    .populate({ path: 'category', model: Category, select: '_id name' });
+};
 
 export const CreateEvent = async ({
   event,
@@ -41,7 +52,7 @@ export const getEventById = async (eventId: string) => {
   try {
     await connectToDatabase();
 
-    const event = await Event.findById(eventId);
+    const event = await populateEvent(Event.findById(eventId));
 
     if (!event) {
       throw new Error('Event not found');
