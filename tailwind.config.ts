@@ -8,7 +8,6 @@ const config = {
     './pages/**/*.{ts,tsx}',
     './components/**/*.{ts,tsx}',
     './app/**/*.{ts,tsx}',
-    './src/**/*.{ts,tsx}',
     // Add UploadThing UI paths
     './node_modules/@uploadthing/react/dist**',
   ],
