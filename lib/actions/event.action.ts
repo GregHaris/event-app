@@ -6,6 +6,8 @@ import { handleError } from '../utils';
 import Event from '../database/models/event.model';
 import User from '../database/models/user.model';
 
+
+
 export const CreateEvent = async ({
   event,
   userId,
@@ -30,6 +32,22 @@ export const CreateEvent = async ({
     console.log(`Event created, redirect to: ${path}`);
 
     return JSON.parse(JSON.stringify(newEvent));
+  } catch (error) {
+    handleError(error);
+  }
+};
+
+export const getEventById = async (eventId: string) => {
+  try {
+    await connectToDatabase();
+
+    const event = await Event.findById(eventId);
+
+    if (!event) {
+      throw new Error('Event not found');
+    }
+
+    return JSON.parse(JSON.stringify(event));
   } catch (error) {
     handleError(error);
   }
