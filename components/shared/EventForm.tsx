@@ -1,7 +1,9 @@
 'use client';
 
-import { useState } from 'react';
 import { useForm } from 'react-hook-form';
+import { useRouter } from 'next/navigation';
+import { useState } from 'react';
+import { useUploadThing } from '@/lib/uploadthing';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 import Image from 'next/image';
@@ -18,6 +20,7 @@ import { Textarea } from '@ui/textarea';
 import Dropdown from './Dropdown';
 import FileUploader from './FileUploader';
 
+import { CreateEvent } from '@/lib/actions/event.action';
 import { eventDefaultValues } from '@/constants';
 import { eventFormSchema } from '@lib/validator';
 
@@ -32,6 +35,9 @@ const EventForm = ({ userId, type }: EventFormProps) => {
   // Set default values
   const initialValues = eventDefaultValues;
 
+  const router = useRouter();
+  const { startUpload } = useUploadThing('imageUploader');
+
   // 1. Define your form.
   const form = useForm<z.infer<typeof eventFormSchema>>({
     resolver: zodResolver(eventFormSchema),
@@ -39,10 +45,33 @@ const EventForm = ({ userId, type }: EventFormProps) => {
   });
 
   // 2. Define a submit handler.
-  function onSubmit(values: z.infer<typeof eventFormSchema>) {
-    // Do something with the form values.
-    // ✅ This will be type-safe and validated.
-    console.log(values);
+  async function onSubmit(values: z.infer<typeof eventFormSchema>) {
+    let uploadedImageUrl = values.imageUrl;
+
+    if (files.length > 0) {
+      const uploadedImages = await startUpload(files);
+
+      if (!uploadedImages) {
+        return;
+      }
+      uploadedImageUrl = uploadedImages[0].url;
+    }
+
+    if (type === 'Create') {
+      try {
+        const newEvent = await CreateEvent({
+          event: { ...values, imageUrl: uploadedImageUrl },
+          userId,
+          path: '/profile',
+        });
+
+        if (newEvent) {
+          router.push(`/events/${newEvent._id}`);
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    }
   }
 
   return (
