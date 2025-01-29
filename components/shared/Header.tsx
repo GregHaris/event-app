@@ -21,7 +21,7 @@ export const Header = () => {
         </Link>
 
         <SignedIn>
-          <div className="hidden md:flex-between w-full max-w-xs">
+          <div className=" md:flex-between w-full max-w-xs">
             <NavItems />
           </div>
         </SignedIn>
