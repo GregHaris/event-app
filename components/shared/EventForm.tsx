@@ -167,7 +167,7 @@ const EventForm = ({ userId, type }: EventFormProps) => {
                       onChange={(date: Date | null) => field.onChange(date)}
                       showTimeSelect
                       timeInputLabel="Time:"
-                      dateFormat="MM/dd/yyyy h:mm aa"
+                      dateFormat="dd/MM/yyyy h:mm aa"
                       wrapperClassName="datePicker"
                     />
                   </div>
@@ -232,7 +232,7 @@ const EventForm = ({ userId, type }: EventFormProps) => {
                     <FormField
                       control={form.control}
                       name="isFree"
-                      render={({ field }) => (
+                      render={({ field: isFreeField }) => (
                         <FormItem>
                           <FormControl>
                             <div className="flex items-center">
@@ -244,9 +244,10 @@ const EventForm = ({ userId, type }: EventFormProps) => {
                               </label>
                               <Checkbox
                                 id="isFree"
-                                checked={field.value}
-                                onCheckedChange={field.onChange}
-                                className="mr-2 h-5 w-5 border-2 border-primary-500"
+                                checked={isFreeField.value}
+                                onCheckedChange={isFreeField.onChange}
+                                disabled={!!field.value}
+                                className="mr-2 h-5 w-5 border-2 border-primary-500 cursor-pointer"
                               />
                             </div>
                           </FormControl>
