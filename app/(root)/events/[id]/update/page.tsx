@@ -4,7 +4,11 @@ import EventForm from '@shared/EventForm';
 const UpdateEvent = async () => {
   const { sessionClaims } = await auth();
 
-  const userId = sessionClaims?.userId as string;
+  // Type assertion to help TypeScript understand the structure
+  const claims = sessionClaims as CustomJwtSessionClaims;
+
+  // Access userId from the nested object
+  const userId = claims?.userid?.userId as string;
 
   return (
     <>
