@@ -42,14 +42,17 @@ export const DeleteConfirmation = ({ eventId }: { eventId: string }) => {
         </AlertDialogHeader>
 
         <AlertDialogFooter>
-          <AlertDialogCancel>Cancel</AlertDialogCancel>
+          <AlertDialogCancel className="cursor-pointer">
+            Cancel
+          </AlertDialogCancel>
 
           <AlertDialogAction
             onClick={() =>
               startTransition(async () => {
-                await deleteEvent(eventId, pathname);
+                await deleteEvent({ eventId, path: pathname });
               })
             }
+            className="cursor-pointer"
           >
             {isPending ? 'Deleting...' : 'Delete'}
           </AlertDialogAction>
