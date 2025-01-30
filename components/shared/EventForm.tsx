@@ -20,7 +20,7 @@ import { Textarea } from '@ui/textarea';
 import Dropdown from './Dropdown';
 import FileUploader from './FileUploader';
 
-import { CreateEvent } from '@/lib/actions/event.action';
+import { createEvent } from '@/lib/actions/event.action';
 import { eventDefaultValues } from '@/constants';
 import { eventFormSchema } from '@lib/validator';
 
@@ -59,7 +59,7 @@ const EventForm = ({ userId, type }: EventFormProps) => {
 
     if (type === 'Create') {
       try {
-        const newEvent = await CreateEvent({
+        const newEvent = await createEvent({
           event: { ...values, imageUrl: uploadedImageUrl },
           userId,
           path: '/profile',
