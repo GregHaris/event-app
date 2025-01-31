@@ -2,7 +2,7 @@
 
 import { useForm } from 'react-hook-form';
 import { useRouter } from 'next/navigation';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { useUploadThing } from '@/lib/uploadthing';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -57,17 +57,6 @@ const EventForm = ({ userId, type, event, eventId }: EventFormProps) => {
     resolver: zodResolver(eventFormSchema),
     defaultValues: initialValues,
   });
-
-  // Use useEffect to watch for changes in the price field
-  useEffect(() => {
-    const priceWatcher = form.watch((value, { name }) => {
-      if (name === 'price' && value.price) {
-        form.setValue('isFree', false);
-      }
-    });
-
-    return () => priceWatcher.unsubscribe();
-  }, [form]);
 
   // 2. Define a submit handler.
   async function onSubmit(values: z.infer<typeof eventFormSchema>) {
@@ -303,6 +292,12 @@ const EventForm = ({ userId, type, event, eventId }: EventFormProps) => {
                       placeholder="Price"
                       {...field}
                       className="p-regular-16 border-0 bg-grey-50 outline-offset-0 focus:border-0 focus-visible:ring-0 focus-visible:ring-offset-0"
+                      onChange={(e) => {
+                        field.onChange(e);
+                        if (e.target.value) {
+                          form.setValue('isFree', false);
+                        }
+                      }}
                     />
                     <FormField
                       control={form.control}
@@ -320,8 +315,12 @@ const EventForm = ({ userId, type, event, eventId }: EventFormProps) => {
                               <Checkbox
                                 id="isFree"
                                 checked={isFreeField.value}
-                                onCheckedChange={isFreeField.onChange}
-                                disabled={!!field.value}
+                                onCheckedChange={(checked) => {
+                                  isFreeField.onChange(checked);
+                                  if (checked) {
+                                    form.setValue('price', '');
+                                  }
+                                }}
                                 className="mr-2 h-5 w-5 border-2 border-primary-500 cursor-pointer"
                               />
                             </div>
