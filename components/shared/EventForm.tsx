@@ -2,7 +2,7 @@
 
 import { useForm } from 'react-hook-form';
 import { useRouter } from 'next/navigation';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useUploadThing } from '@/lib/uploadthing';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -20,20 +20,34 @@ import { Textarea } from '@ui/textarea';
 import Dropdown from './Dropdown';
 import FileUploader from './FileUploader';
 
-import { createEvent } from '@/lib/actions/event.action';
+import { createEvent, updateEvent } from '@/lib/actions/event.action';
 import { eventDefaultValues } from '@/constants';
 import { eventFormSchema } from '@lib/validator';
+import { IEvent } from '@/lib/database/models/event.model';
 
 type EventFormProps = {
   userId: string;
   type: 'Create' | 'Update';
+  event?: IEvent;
+  eventId?: string;
 };
 
-const EventForm = ({ userId, type }: EventFormProps) => {
+const EventForm = ({ userId, type, event, eventId }: EventFormProps) => {
   const [files, setFiles] = useState<File[]>([]);
 
   // Set default values
-  const initialValues = eventDefaultValues;
+  const initialValues =
+    event && type === 'Update'
+      ? {
+          ...event,
+          startDateTime: new Date(event.startDateTime),
+          endDateTime: new Date(event.endDateTime),
+          price:
+            event.price !== null && event.price !== undefined
+              ? event.price.toString()
+              : '',
+        }
+      : eventDefaultValues;
 
   const router = useRouter();
   const { startUpload } = useUploadThing('imageUploader');
@@ -43,6 +57,17 @@ const EventForm = ({ userId, type }: EventFormProps) => {
     resolver: zodResolver(eventFormSchema),
     defaultValues: initialValues,
   });
+
+  // Use useEffect to watch for changes in the price field
+  useEffect(() => {
+    const priceWatcher = form.watch((value, { name }) => {
+      if (name === 'price' && value.price) {
+        form.setValue('isFree', false);
+      }
+    });
+
+    return () => priceWatcher.unsubscribe();
+  }, [form]);
 
   // 2. Define a submit handler.
   async function onSubmit(values: z.infer<typeof eventFormSchema>) {
@@ -67,6 +92,27 @@ const EventForm = ({ userId, type }: EventFormProps) => {
 
         if (newEvent) {
           router.push(`/events/${newEvent._id}`);
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    }
+
+    if (type === 'Update') {
+      if (!eventId) {
+        router.back();
+        return;
+      }
+
+      try {
+        const updatedEvent = await updateEvent({
+          userId,
+          event: { ...values, imageUrl: uploadedImageUrl, _id: eventId },
+          path: `/events/${eventId}`,
+        });
+
+        if (updatedEvent) {
+          router.push(`/events/${updatedEvent._id}`);
         }
       } catch (error) {
         console.log(error);

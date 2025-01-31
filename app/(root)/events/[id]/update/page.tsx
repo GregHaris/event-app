@@ -1,7 +1,12 @@
-import { auth } from '@clerk/nextjs/server';
 import EventForm from '@shared/EventForm';
+import { auth } from '@clerk/nextjs/server';
+import { getEventById } from '@/lib/actions/event.action';
 
-const UpdateEvent = async () => {
+type UpdateEventProps = {
+  params: { id: string };
+};
+
+const UpdateEvent = async ({ params: { id } }: UpdateEventProps) => {
   const { sessionClaims } = await auth();
 
   // Type assertion to help TypeScript understand the structure
@@ -9,6 +14,8 @@ const UpdateEvent = async () => {
 
   // Access userId from the nested object
   const userId = claims?.userid?.userId as string;
+
+  const event = await getEventById(id);
 
   return (
     <>
@@ -19,7 +26,12 @@ const UpdateEvent = async () => {
         </h3>
       </section>
       <div className="wrapper my-8">
-        <EventForm userId={userId} type="Update" />
+        <EventForm
+          userId={userId}
+          type="Update"
+          event={event}
+          eventId={event._id}
+        />
       </div>
     </>
   );
