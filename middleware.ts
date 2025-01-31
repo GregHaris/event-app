@@ -2,7 +2,7 @@ import { clerkMiddleware, createRouteMatcher } from '@clerk/nextjs/server';
 
 const isPublicRoute = createRouteMatcher([
   '/',
-  '/event/:id',
+  '/events/:id', 
   '/api/webhooks',
   '/api/webhooks/(.*)',
   '/api/uploadthing',
