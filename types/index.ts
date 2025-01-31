@@ -147,4 +147,7 @@ export type SearchParamProps = {
   params: {
     id: string;
   };
+  searchParams: {
+    page: string;
+  };
 };
