@@ -49,7 +49,7 @@ const Card = async ({ event, hasOrderLink, hidePrice }: CardProps) => {
             <span className="p-semi-bold-14 w-min rounded-full bg-green-100 px-4 py-1 text-green-60">
               {event.isFree ? 'Free' : `$${event.price}`}
             </span>
-            <p className="p-semi-bold-14 w-min rounded-full bg-grey-500/10 px-4 py-1 text-grey-500">
+            <p className="p-semi-bold-14 w-min rounded-full bg-grey-500/10 px-4 py-1 text-grey-500 whitespace-nowrap line-clamp-1">
               {event.category.name}
             </p>
           </div>
