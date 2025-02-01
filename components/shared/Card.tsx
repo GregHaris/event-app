@@ -22,13 +22,7 @@ const Card = async ({ event, hasOrderLink, hidePrice }: CardProps) => {
   // Access userId from the nested object
   const userId = claims?.userId?.userId as string;
 
-  console.log('userId', userId);
-
-  console.log('event.organizer._id', event.organizer._id);
-
   const isEventCreator = userId === event.organizer._id.toString();
-
-  console.log('isEventCreator', isEventCreator);
 
   return (
     <div className="group relative flex min-h-[380px] w-full max-w-[400px] flex-col overflow-hidden rounded-xl bg-white shadow-md transition-all hover:shadow-lg md:min-h-[438px]">
