@@ -42,10 +42,6 @@ const EventForm = ({ userId, type, event, eventId }: EventFormProps) => {
           ...event,
           startDateTime: new Date(event.startDateTime),
           endDateTime: new Date(event.endDateTime),
-          price:
-            event.price !== null && event.price !== undefined
-              ? event.price.toString()
-              : '',
         }
       : eventDefaultValues;
 
