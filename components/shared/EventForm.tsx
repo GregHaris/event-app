@@ -20,7 +20,7 @@ import { Textarea } from '@ui/textarea';
 import Dropdown from './Dropdown';
 import FileUploader from './FileUploader';
 
-import { createEvent, updateEvent } from '@/lib/actions/event.action';
+import { createEvent, updateEvent } from '@/lib/actions/event.actions';
 import { eventDefaultValues } from '@/constants';
 import { eventFormSchema } from '@lib/validator';
 import { IEvent } from '@/lib/database/models/event.model';
