@@ -45,16 +45,16 @@ export const checkoutOrder = async (order: CheckoutOrderParams) => {
 
 export const createOrder = async (order: CreateOrderParams) => {
   try {
-    await connectToDatabase()
+    await connectToDatabase();
 
     const newOrder = await Order.create({
       ...order,
       event: order.eventId,
       buyer: order.buyerId,
-    })
+    });
 
-    return JSON.parse(JSON.stringify(newOrder))
+    return JSON.parse(JSON.stringify(newOrder));
   } catch (error) {
-    handleError(error)
+    handleError(error);
   }
-}
+};
