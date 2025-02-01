@@ -3,10 +3,16 @@ import { auth } from '@clerk/nextjs/server';
 import { getEventById } from '@/lib/actions/event.actions';
 
 type UpdateEventProps = {
-  params: { id: string };
+  params: Promise<{ id: string }>;
 };
 
-const UpdateEvent = async ({ params: { id } }: UpdateEventProps) => {
+const UpdateEvent = async (props: UpdateEventProps) => {
+  const params = await props.params;
+
+  const {
+    id
+  } = params;
+
   const { sessionClaims } = await auth();
 
   // Type assertion to help TypeScript understand the structure
