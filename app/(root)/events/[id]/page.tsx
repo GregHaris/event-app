@@ -11,7 +11,7 @@ import {
 } from '@/lib/actions/event.actions';
 
 const EventDetails = async (props: SearchParamProps) => {
-  const searchParams = await props.searchParams;
+  const resolvedSearchParams = await props.searchParams;
   const params = await props.params;
 
   const {
@@ -23,7 +23,7 @@ const EventDetails = async (props: SearchParamProps) => {
   const relatedEvents = await getRelatedEventsByCategory({
     categoryId: event.category._id,
     eventId: event._id,
-    page: searchParams.page as string,
+    page: resolvedSearchParams.page as string,
   });
 
   return (
