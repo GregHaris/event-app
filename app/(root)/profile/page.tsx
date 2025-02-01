@@ -2,8 +2,10 @@ import Link from 'next/link';
 import { auth } from '@clerk/nextjs/server';
 
 import { Button } from '@/components/ui/button';
-import Collection from '@/components/shared/Collection';
 import { getEventsByUser } from '@/lib/actions/event.actions';
+import { getOrdersByUser } from '@/lib/actions/order.actions';
+import { IOrder } from '@/lib/database/models/order.model';
+import Collection from '@/components/shared/Collection';
 
 const ProfilePage = async () => {
   const { sessionClaims } = await auth();
@@ -12,7 +14,11 @@ const ProfilePage = async () => {
   const claims = sessionClaims as CustomJwtSessionClaims;
 
   // Access userId from the nested object
-  const userId = claims?.userid?.userId as string;
+  const userId = claims?.userId?.userId as string;
+
+
+  const orders = await getOrdersByUser({ userId, page: 1 });
+  const orderedEvents = orders?.data.map((order : IOrder) => order.event)  || [];
 
   const organizedEvents = await getEventsByUser({ userId, page: 1 });
 
@@ -28,18 +34,18 @@ const ProfilePage = async () => {
         </div>
       </section>
 
-      {/*   <section className="wrapper my-8">
+        <section className="wrapper my-8">
         <Collection
-          data={events?.data}
+          data={orderedEvents}
           emptyTitle="No events tickets purchased"
           emptyStateSubtext="Check the events page to find amazing events to explore"
           collectionType="My_Tickets"
           limit={3}
           page={1}
           urlParamName="ordersPage"
-          totalPages={2}
+          totalPages={orders?.totalPages}
         />
-      </section> */}
+      </section>
 
       {/* {Events Organized} */}
       {
