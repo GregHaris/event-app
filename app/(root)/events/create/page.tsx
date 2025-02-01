@@ -8,7 +8,7 @@ const CreateEvent = async () => {
   const claims = sessionClaims as CustomJwtSessionClaims;
 
   // Access userId from the nested object
-  const userId = claims?.userid?.userId as string;
+  const userId = claims?.userId?.userId as string;
 
   return (
     <>

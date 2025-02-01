@@ -19,7 +19,7 @@ const UpdateEvent = async (props: UpdateEventProps) => {
   const claims = sessionClaims as CustomJwtSessionClaims;
 
   // Access userId from the nested object
-  const userId = claims?.userid?.userId as string;
+  const userId = claims?.userId?.userId as string;
 
   const event = await getEventById(id);
 

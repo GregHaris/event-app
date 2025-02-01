@@ -2,7 +2,7 @@ export {};
 
 declare global {
   interface CustomJwtSessionClaims {
-    userid?: {
+    userId?: {
       userId?: string;
     };
   }
