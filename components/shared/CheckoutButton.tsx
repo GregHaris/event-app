@@ -17,36 +17,36 @@ const CheckoutButton = ({ event }: { event: IEvent }) => {
   // Check if the user is the creator of the event
   const isEventCreator = userId === event.organizer._id.toString();
 
-
   const hasEventFinished = new Date(event.endDateTime) < new Date();
 
   return (
     !isEventCreator && (
       <div className="flex item-center gap-3">
-      {hasEventFinished ? (
-        <p className="p-2 text-red-400">
-          {' '}
-          Sorry, tickets are no longer available.
-        </p>
-      ) : (
-        <>
-          <SignedOut>
-            <SignInButton>
-              <Button
-                className="button cursor-pointer rounded-full"
-                size={'lg'}
-              >
-                Get Tickets
-              </Button>
-            </SignInButton>
-          </SignedOut>
+        {hasEventFinished ? (
+          <p className="p-2 text-red-400">
+            {' '}
+            Sorry, tickets are no longer available.
+          </p>
+        ) : (
+          <>
+            <SignedOut>
+              <SignInButton>
+                <Button
+                  className="button cursor-pointer rounded-full"
+                  size={'lg'}
+                >
+                  Get Tickets
+                </Button>
+              </SignInButton>
+            </SignedOut>
 
-          <SignedIn>
-            <Checkout event={event} userId={userId} />
-          </SignedIn>
-        </>
-      )}
-    </div>)
+            <SignedIn>
+              <Checkout event={event} userId={userId} />
+            </SignedIn>
+          </>
+        )}
+      </div>
+    )
   );
 };
 
