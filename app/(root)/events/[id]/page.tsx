@@ -1,24 +1,23 @@
 import Image from 'next/image';
 
-import { SearchParamProps } from '@/types';
 import { formatDateTime } from '@/lib/utils';
+import { SearchParamProps } from '@/types';
 
+import CheckoutButton from '@/components/shared/CheckoutButton';
+import Collection from '@/components/shared/Collection';
 import {
   getEventById,
   getRelatedEventsByCategory,
 } from '@/lib/actions/event.action';
-import Collection from '@/components/shared/Collection';
 
-const EventDetails = async ({
-  params: { id },
-  searchParams,
-}: SearchParamProps) => {
+const EventDetails = async ({ params, searchParams }: SearchParamProps) => {
+  const { id } = await params;
   const event = await getEventById(id);
 
   const relatedEvents = await getRelatedEventsByCategory({
     categoryId: event.category._id,
     eventId: event._id,
-    page: searchParams.page as string,
+    page: (await searchParams).page as string,
   });
 
   return (
@@ -53,7 +52,7 @@ const EventDetails = async ({
                 </p>
               </div>
             </div>
-            {/* {CHECKOUT BUTTON} */}
+            <CheckoutButton event={event} />
             <div className="flex flex-col gap-5">
               <div className="flex gap-2 md:gap-3">
                 <Image
@@ -62,7 +61,7 @@ const EventDetails = async ({
                   width={32}
                   height={32}
                 />
-                <div className="p-medium-16 lg:p-regular-20 flex flex-wrap items-center">
+                <div className="p-medium-16 lg:p-regular-20 items-center">
                   <p>
                     {formatDateTime(event.startDateTime).dateOnly} -{' '}
                     {formatDateTime(event.startDateTime).timeOnly}
