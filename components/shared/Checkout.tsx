@@ -5,7 +5,6 @@ import { Button } from '../ui/button';
 import { checkoutOrder } from '@/lib/actions/order.actions';
 import { IEvent } from '@/lib/database/models/event.model';
 
-
 loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY!);
 
 const Checkout = ({ event, userId }: { event: IEvent; userId: string }) => {
@@ -33,7 +32,6 @@ const Checkout = ({ event, userId }: { event: IEvent; userId: string }) => {
     };
 
     await checkoutOrder(order);
-
   };
   return (
     <form action={onCheckout}>
