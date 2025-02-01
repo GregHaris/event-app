@@ -14,10 +14,15 @@ const CheckoutButton = ({ event }: { event: IEvent }) => {
 
   const userId = user?.publicMetadata.userId as string;
 
+  // Check if the user is the creator of the event
+  const isEventCreator = userId === event.organizer._id.toString();
+
+
   const hasEventFinished = new Date(event.endDateTime) < new Date();
 
   return (
-    <div className="flex item-center gap-3">
+    !isEventCreator && (
+      <div className="flex item-center gap-3">
       {hasEventFinished ? (
         <p className="p-2 text-red-400">
           {' '}
@@ -41,7 +46,7 @@ const CheckoutButton = ({ event }: { event: IEvent }) => {
           </SignedIn>
         </>
       )}
-    </div>
+    </div>)
   );
 };
 
