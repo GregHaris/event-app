@@ -3,7 +3,7 @@ import { auth } from '@clerk/nextjs/server';
 
 import { Button } from '@/components/ui/button';
 import Collection from '@/components/shared/Collection';
-import { getEventsByUser } from '@/lib/actions/event.action';
+import { getEventsByUser } from '@/lib/actions/event.actions';
 
 const ProfilePage = async () => {
   const { sessionClaims } = await auth();
