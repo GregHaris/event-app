@@ -6,8 +6,11 @@ import { Button } from '../ui/button';
 import Checkout from './Checkout';
 
 const CheckoutButton = ({ event }: { event: IEvent }) => {
+  const { isLoaded, user } = useUser();
 
-  const { user } = useUser();
+  if (!isLoaded) {
+    return <div>Loading...</div>;
+  }
 
   const userId = user?.publicMetadata.userId as string;
 
