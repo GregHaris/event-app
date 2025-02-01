@@ -8,7 +8,7 @@ import Collection from '@/components/shared/Collection';
 import {
   getEventById,
   getRelatedEventsByCategory,
-} from '@/lib/actions/event.action';
+} from '@/lib/actions/event.actions';
 
 const EventDetails = async ({ params, searchParams }: SearchParamProps) => {
   const { id } = await params;

@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { Button } from '@ui/button';
 import Collection from '@shared/Collection';
 
-import { getAllEvents } from '@/lib/actions/event.action';
+import { getAllEvents } from '@/lib/actions/event.actions';
 
 export default async function Home() {
   const events = await getAllEvents({
