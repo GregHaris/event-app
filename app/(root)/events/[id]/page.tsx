@@ -21,7 +21,7 @@ const EventDetails = async (props: SearchParamProps) => {
   const relatedEvents = await getRelatedEventsByCategory({
     categoryId: event.category._id,
     eventId: event._id,
-    page: resolvedSearchParams.page as string,
+    page: resolvedSearchParams?.page as string,
   });
 
   return (
@@ -103,8 +103,8 @@ const EventDetails = async (props: SearchParamProps) => {
           emptyTitle="No Events Found"
           emptyStateSubtext="Check back later"
           collectionType="All_Events"
-          limit={6}
-          page={1}
+          limit={3}
+          page={resolvedSearchParams?.page as string}
           totalPages={2}
         />
       </section>
