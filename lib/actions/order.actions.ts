@@ -68,6 +68,21 @@ export const createOrder = async (order: CreateOrderParams) => {
   }
 };
 
+export const hasUserPurchasedEvent = async (
+  userId: string,
+  eventId: string
+) => {
+  try {
+    await connectToDatabase();
+
+    const order = await Order.findOne({ buyer: userId, event: eventId });
+
+    return !!order;
+  } catch (error) {
+    handleError(error);
+  }
+};
+
 // GET ORDERS BY EVENT
 export async function getOrdersByEvent({
   searchString,
