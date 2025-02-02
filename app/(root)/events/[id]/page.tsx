@@ -11,12 +11,10 @@ import {
 } from '@/lib/actions/event.actions';
 
 const EventDetails = async (props: SearchParamProps) => {
-  const resolvedSearchParams = await props.SearchParamsPromise;
+  const resolvedSearchParams = await props.searchParamsPromise;
   const params = await props.params;
 
-  const {
-    id
-  } = params;
+  const { id } = params;
 
   const event = await getEventById(id);
 
