@@ -15,12 +15,15 @@ export default async function Home({ searchParams }: SearchParamProps) {
   const page = Number(resolvedSearchParams.page) || 1;
   const searchText = (resolvedSearchParams.query as string) || '';
   const category = (resolvedSearchParams.category as string) || '';
+  const limit = resolvedSearchParams.limit
+    ? Number(resolvedSearchParams.limit)
+    : 6;
 
   const events = await getAllEvents({
     query: searchText,
     category,
     page,
-    limit: 6,
+    limit: limit,
   });
 
   return (
@@ -67,9 +70,9 @@ export default async function Home({ searchParams }: SearchParamProps) {
           emptyTitle="No Events Found"
           emptyStateSubtext="Check back later"
           collectionType="All_Events"
-          limit={6}
-          page={1}
-          totalPages={2}
+          limit={limit}
+          page={page}
+          totalPages={events?.totalPages}
         />
       </section>
     </>
