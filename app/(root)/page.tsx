@@ -3,6 +3,7 @@ import Link from 'next/link';
 
 import { Button } from '@ui/button';
 import { SearchParamProps } from '@/types';
+import CategoryFilter from '@shared/CategoryFilter';
 import Collection from '@shared/Collection';
 import Search from '@shared/Search';
 
@@ -59,7 +60,7 @@ export default async function Home({ searchParams }: SearchParamProps) {
         </h2>
         <div className="flex w-full flex-col gap-5 md:flex-row">
           <Search />
-          CategoryFilter
+          <CategoryFilter />
         </div>
         <Collection
           data={events?.data}
