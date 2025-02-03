@@ -30,7 +30,7 @@ const CategoryFilter = () => {
     getCategories();
   }, []);
 
-  // update the URL based on the selected categor
+  // update the URL based on the selected category
   const onSelectCategory = (category: string) => {
     let newUrl = '';
 
