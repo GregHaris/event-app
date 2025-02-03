@@ -8,8 +8,8 @@ import { IOrder } from '@/lib/database/models/order.model';
 import { SearchParamProps } from '@/types';
 import Collection from '@/components/shared/Collection';
 
-const ProfilePage = async ({ searchParamsPromise }: SearchParamProps) => {
-  const resolvedSearchParams = await searchParamsPromise;
+const ProfilePage = async ({ searchParams }: SearchParamProps) => {
+  const resolvedSearchParams = await searchParams;
   const { sessionClaims } = await auth();
 
   // Type assertion to help TypeScript understand the structure

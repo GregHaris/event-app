@@ -11,7 +11,7 @@ import {
 } from '@/lib/actions/event.actions';
 
 const EventDetails = async (props: SearchParamProps) => {
-  const resolvedSearchParams = await props.searchParamsPromise;
+  const resolvedSearchParams = await props.searchParams;
   const params = await props.params;
 
   const { id } = params;
