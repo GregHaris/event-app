@@ -3,8 +3,8 @@ import Image from 'next/image';
 import { formatDateTime } from '@/lib/utils';
 import { SearchParamProps } from '@/types';
 
-import CheckoutButton from '@/components/shared/CheckoutButton';
-import Collection from '@/components/shared/Collection';
+import CheckoutButton from '@shared/CheckoutButton';
+import Collection from '@shared/Collection';
 import {
   getEventById,
   getRelatedEventsByCategory,

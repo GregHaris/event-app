@@ -1,12 +1,12 @@
 import { auth } from '@clerk/nextjs/server';
 import Link from 'next/link';
 
-import { Button } from '@/components/ui/button';
+import { Button } from '@ui/button';
 import { getEventsByUser } from '@/lib/actions/event.actions';
 import { getOrdersByUser } from '@/lib/actions/order.actions';
 import { IOrder } from '@/lib/database/models/order.model';
 import { SearchParamProps } from '@/types';
-import Collection from '@/components/shared/Collection';
+import Collection from '@shared/Collection';
 
 const ProfilePage = async ({ searchParams }: SearchParamProps) => {
   const resolvedSearchParams = await searchParams;
