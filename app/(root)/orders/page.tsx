@@ -57,10 +57,7 @@ const Orders = async ({ searchParams }: SearchParamProps) => {
                         {row.eventTitle}
                       </td>
                       <td className="min-w-[150px] py-4">{row.buyer}</td>
-                      <td className="min-w-[200px] py-4">
-                        {row.buyerEmail}
-                      </td>{' '}
-                      {/* Display buyer email */}
+                      <td className="min-w-[200px] py-4">{row.buyerEmail}</td>
                       <td className="min-w-[100px] py-4">
                         {formatDateTime(row.createdAt).dateTime}
                       </td>
