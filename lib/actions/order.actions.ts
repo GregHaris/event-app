@@ -56,10 +56,14 @@ export const createOrder = async (order: CreateOrderParams) => {
   try {
     await connectToDatabase();
 
+    const user = await User.findById(order.buyerId);
+    if (!user) throw new Error('User not found');
+
     const newOrder = await Order.create({
       ...order,
       event: order.eventId,
       buyer: order.buyerId,
+      buyerEmail: user.email,
     });
 
     return JSON.parse(JSON.stringify(newOrder));
@@ -127,6 +131,7 @@ export async function getOrdersByEvent({
           buyer: {
             $concat: ['$buyer.firstName', ' ', '$buyer.lastName'],
           },
+          buyerEmail: '$buyer.email',
         },
       },
       {
