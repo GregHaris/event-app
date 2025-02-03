@@ -105,7 +105,7 @@ const EventDetails = async (props: SearchParamProps) => {
           collectionType="All_Events"
           limit={3}
           page={resolvedSearchParams?.page as string}
-          totalPages={2}
+          totalPages={relatedEvents?.totalPages}
         />
       </section>
     </>
